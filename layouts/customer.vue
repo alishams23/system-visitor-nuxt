@@ -41,7 +41,7 @@
         </nuxt-link>
       </li>
       <li class="nav-item text-parsiyan-hover py-2">
-        <nuxt-link to="Order" class="nav-link rtl fw-light rounded-3" :class="currentRouteName() == 'Order' ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
+        <nuxt-link to="Cart" class="nav-link rtl fw-light rounded-3" :class="currentRouteName() == 'Cart' ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi ms-2 bi-cart2" viewBox="0 0 16 16">
             <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
           </svg>
@@ -58,17 +58,7 @@
         </nuxt-link>
       </li>
       <li class="nav-item py-2">
-        <nuxt-link to="Paymenthistory" class="nav-link rtl fw-light rounded-3" :class="currentRouteName() == 'Paymenthistory' ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi ms-2 bi-calendar2-check" viewBox="0 0 16 16">
-            <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-          </svg>
-          <span>تاریخچه پرداخت</span>
-        </nuxt-link>
-      </li>
-      <li class="nav-item py-2">
-        <nuxt-link to="Customersaccount" class="nav-link rtl  fw-light rounded-3" :class="currentRouteName() == 'exit' ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
+        <nuxt-link to="Visitor" class="nav-link rtl  fw-light rounded-3" :class="currentRouteName() == 'exit' ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi ms-2 bi-box-arrow-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
             <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>

@@ -1322,3 +1322,7 @@ a:hover {
 .text-parsiyan-hover:hover {
     color: #600082 !important;
 }
+
+.text-parsiyan {
+    color: #600082 !important;
+}

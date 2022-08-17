@@ -1,44 +1,26 @@
 <template>
-      <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row mt-3 justify-content-around">
-                    <div class="card mb-3 shadow col-12 col-md-3" style="width: 18rem;">
-                        <img class="card-img-top img-fluid p-2" src="@/assets/img/slides-1.jpg">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h5 class="card-title text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h5>
-                            <input type="number" class=" form-control mb-3">
-                            <span class=" bg-parsiyan text-center text-white px-3 py-1 rounded-3">ثبت</span>
-                        </div>
-                    </div>
-                    <div class="card mb-3 shadow col-12 col-md-3" style="width: 18rem;">
-                        <img class="card-img-top img-fluid p-2" src="@/assets/img/slides-1.jpg">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h5>
-                            <input type="number" class=" form-control mb-3">
-                            <span class=" bg-parsiyan text-center text-white px-3 py-1 rounded-3">ثبت</span>                            
-                        </div>
-                    </div>
-                    <div class="card mb-3 shadow col-12 col-md-3" style="width: 18rem;">
-                        <img class="card-img-top img-fluid p-2" src="@/assets/img/slides-1.jpg">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h5>
-                            <input type="number" class=" form-control mb-3">
-                            <span class=" bg-parsiyan text-center text-white px-3 py-1 rounded-3">ثبت</span>                            
-                        </div>
-                    </div>
-                    <div class="card mb-3 shadow col-12 col-md-3" style="width: 18rem;">
-                        <img class="card-img-top img-fluid p-2" src="@/assets/img/slides-1.jpg">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h5>
-                            <input type="number" class=" form-control mb-3">
-                            <span class=" bg-parsiyan text-center text-white px-3 py-1 rounded-3">ثبت</span>                            
-                        </div>
-                    </div>
-                </div>
-      </div>
-      </div>
+<div>
+ <nuxt-link to="Catalog" href="/t/addworksample/" class="rounded-5 shadow-sm text-parsiyan m-0 my-3  shadow-1 bg-white border-t hover:bg-gray-100 d-flex justify-content-between " style="overflow: hidden;">
+    <div class="d-flex align-items-center">
+    </div>
+    <div class=" text-center py-3 pr-2">
+        <div class="fw-bold">کاتالوگ محصولات1</div>
+        <div class="text-muted">بستنی / چای / قند / عسل / ...</div>
+    </div>
+    <div>
+    </div> 
+   </nuxt-link>
+ <nuxt-link to="Catalog" class="rounded-5 shadow-sm text-parsiyan m-0 my-3  shadow-1 bg-white border-t hover:bg-gray-100 d-flex justify-content-between " style="overflow: hidden;">
+    <div class="d-flex align-items-center">
+    </div>
+    <div class=" text-center py-3 pr-2">
+        <div class="fw-bold">کاتالوگ محصولات 2</div>
+        <div class="text-muted">بستنی / چای / قند / عسل / ...</div>
+    </div>
+    <div>
+    </div> 
+   </nuxt-link>
+</div>
 </template>
 
 <script>
