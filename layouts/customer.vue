@@ -3,16 +3,17 @@
   <headerpage/>
   <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-    <div class="rounded-4  mb-3">
+    <div class="rounded-4  mb-3" v-if="data != null">
         <div class=" d-flex flex-column justify-content-between py-2 px-2">
             <div class=" d-flex flex-column justify-content-between py-1 rtl">
-              <span class=" pb-2 me-2 ">آقای حسینی</span>
-              <span class=" py-2 me-2 fs-5 fw-bold">فروشگاه برادران حسینی</span>
-              <span class=" pt-2 me-2 fs-6 lead text-muted">تلفن تماس:37307074 </span>
+              <span class=" pb-2 me-2 "> آقای :{{data.first_name}} {{data.last_name}} </span>
+              <span class=" py-2 me-2 fs-5 rtl fw-bold">نام فروشگاه :{{data.name_shop}}</span>
+              <span class=" pt-2 me-2 fs-6 lead text-muted">تلفن تماس:{{data.Phone_number}} </span>
+            
             </div> 
         </div>
     </div>
-    <div class="  bg-parsiyan rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
+    <div v-if="data != null" class="  bg-parsiyan rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
       <div class="d-flex justify-content-between">
         <div class="d-flex ps-2 pt-2">
           <div>
@@ -28,12 +29,12 @@
         <p class="text-white fs-6 pe-2 pt-2">مانده حساب</p>
       </div> 
       <div class="text-white d-flex justify-content-end">
-      <p class="fs-xs px-3 fw-light pt-2">تومان</p> <p class="pe-3 pt-2 fs-5">2</p>
+      <p class="fs-xs px-3 fw-light pt-2">تومان</p> <p class="pe-3 pt-2 fs-5">{{data.payment_invoice}}</p>
       </div>
     </div>
     <ul class="sidebar-nav pt-3" id="sidebar-nav">
       <li class="nav-item text-parsiyan-hover py-2">
-        <nuxt-link to="Customersaccount" class="nav-link rtl fw-light rounded-3" :class="currentRouteName() == 'Customersaccount' ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
+        <nuxt-link to="Customersaccount" class="nav-link rtl fw-light rounded-3" :class="currentRouteCheck('Customersaccount')   ? 'bg-parsiyan text-white' : 'text-black text-parsiyan-hover'">
           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi ms-2 bi-basket" viewBox="0 0 16 16">
             <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
           </svg>
@@ -77,12 +78,17 @@
 </template>
 
 <script>
+import axios from "axios";
 import headerpage from "~/components/Header.vue"
 export default {
  layout: 'customer',
   // OR
   layout (context) {
     return 'customer'
+  },data(){
+    return{
+      data:null
+    }
   }, computed: {
     isAuthenticated: {
       get() {
@@ -92,20 +98,26 @@ export default {
   },components:{headerpage,},methods:{
     currentRouteName() {
       return this.$route.name;
-    }, loginPage() {
-      if (
-        this.isAuthenticated == true 
-      ) {
-       
-      } else {
-        this.$router.push("/login");
-      }
+    },currentRouteCheck(data) {
+      return this.$route.name.split("-").includes(data);
     }
-  },mounted(){
-    this.loginPage()
   },beforeMount() {
     this.$store.commit("onStart");
-  },
+  },mounted(){
+    if (this.$route.params.id) {
+      axios.get(`http://192.168.191.4:8000/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        }).then((response) => {
+          this.data = response.data
+       
+        });
+    }
+  }
 }
 </script>
 
