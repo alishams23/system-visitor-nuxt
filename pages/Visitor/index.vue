@@ -35,7 +35,7 @@ export default {
   methods: {
     async getCustomerInfo() {
       this.loading = true
-      await axios.get(`http://192.168.191.4:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
+      await axios.get(`http://192.168.191.5:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -44,7 +44,7 @@ export default {
           }
         }).then((response) => {
           this.data = response.data
-          this.$router.push({path:`/Customersaccount/${this.customerId}/`,}); 
+          this.$router.push({path:`/customer/${this.customerId}/category/`,}); 
         });
       this.loading = false
     }

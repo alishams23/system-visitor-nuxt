@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{data}}
     <table class="table rtl bg-white table-bordered">
       <thead>
         <tr>
@@ -59,14 +60,7 @@
           </th>
         </tr>
       </thead>
-</table>      
-
-
-<div class=" d-flex justify-content-center">
-<button  type="submit" class=" btn px-5 bg-parsiyan text-white">ثبت</button>
-</div>
-
-
+</table>
   </div>
 </template>
 
@@ -75,12 +69,12 @@ export default {
       layout: "customer",
       data(){
         return{
-          data:[]
+          data:{}
         }
       },
       methods: {
     async getCartInfo() {
-      await axios.get(`http://192.168.191.5:8000/api/product/Order_retrieve/<int:pk>/`)
+      await axios.get(`http://192.168.191.5:8000/api/product/Small_purchase/${this.$route.params.idPurchase}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -90,7 +84,10 @@ export default {
         }).then((response) => {
           this.data = response.data
         });
-    }}
+    }},
+    mounted(){
+        this.getCartInfo()
+    }
 
 
 }

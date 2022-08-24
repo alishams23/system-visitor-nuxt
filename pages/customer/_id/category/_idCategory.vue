@@ -35,7 +35,7 @@ components:{headerpage,},
     },
     methods:{
         async getData(){
-            await axios.get(`http://192.168.191.4:8000/api/product/product_list/${this.$route.params.idCategory}/`)
+            await axios.get(`http://192.168.191.5:8000/api/product/product_list/${this.$route.params.idCategory}/`)
             .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
