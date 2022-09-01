@@ -16,7 +16,7 @@
 
 body {
     font-family: "Open Sans", sans-serif;
-    background: #f6f9ff;
+    background: #f5f5f5;
     color: #444444;
 }
 
@@ -401,16 +401,16 @@ a:hover {
 
 .logo span {
     font-size: 26px;
-    font-weight: 700;
-    color: #012970;
-    font-family: "Nunito", sans-serif;
+    /* font-weight: 700; */
+    color: #9c9c9c;
+  
 }
 
 .header {
     transition: all 0.5s;
     z-index: 997;
     height: 60px;
-    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    /* box-shadow: 0px 2px 20px rgba(1, 42, 112, 0.04); */
     background-color: #fff;
     padding-left: 20px;
     /* Toggle Sidebar Button */
@@ -632,17 +632,17 @@ a:hover {
 
 .sidebar {
     position: fixed;
-    top: 60px;
+    top: 0px;
     left: 0;
     bottom: 0;
     width: 300px;
-    z-index: 996;
+    z-index: 100000;
     transition: all 0.3s;
     padding: 20px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
-    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+    /* box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1); */
     background-color: #fff;
 }
 
@@ -1298,13 +1298,44 @@ a:hover {
     background: #e7e7e7 !important;
 }
 
-.bg-parsiyan {
+.bg-parsian {
     background: #41295a;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to top right, #aa00ff, #3d007e);
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top right, #aa00ff, #3d007e);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.border-none{
+    border: white solid 0px !important;
+}
+.bg-gray{
+    background-color: #edeff5;
+    /* background-color: #b8b8b8 */
+
+}
+
+.bg-parsian-solid {
+    background: #7b00ff;
+ 
+}
+
+.shadow-t1{
+    box-shadow: rgba(0, 0, 0, 0.039) 0px 20px 25px -5px, rgba(0, 0, 0, 0.01) 0px 10px 10px -5px;
+}
+.fs-7{
+font-size: 0.8rem !important;
+}
+
+.background-wallet {
+    background-image: url(~@/assets/pattern1.png);
+    background-size: cover;
+    height: 140px !important;
+}
+
+.bg-parsian-light {
+    background: #f6effd;
+    color:#6e0096 !important ;
 }
 
 .rtl {
@@ -1315,14 +1346,15 @@ a:hover {
     color: #003e78 !important;
 }
 
-.text-parsiyan-hover {
+.text-parsian-hover {
     transition: all 0.3s ease-in-out;
 }
 
-.text-parsiyan-hover:hover {
+.text-parsian-hover:hover {
     color: #600082 !important;
+    padding-right: 25px;
 }
 
-.text-parsiyan {
+.text-parsian {
     color: #600082 !important;
 }

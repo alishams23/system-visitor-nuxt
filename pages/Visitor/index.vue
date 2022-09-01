@@ -1,6 +1,6 @@
 <template>
   <div class="  row justify-content-center mt-5">
-    <form @submit.prevent="getCustomerInfo" class=" col-lg-8 col-md-11 col-11 bg-white p-4 py-5 rounded-4 shadow-sm">
+    <form @submit.prevent="getCustomerInfo" class=" col-lg-8 col-md-11 col-11 bg-white p-4 py-5 rounded-4 shadow-t2">
       <div class=" text-center text-primary mt-2">
         <h4>ورود به حساب مشتریان</h4>
       </div>
@@ -9,11 +9,11 @@
           <label for="customerId" class=" my-4"><span class=" fs-6">کد مشتری را وارد کنید</span></label>
           <input id="customerId" v-model="customerId" class=" form-control mb-5">
           <div v-if="loading == true" class="d-flex  align-items-center">
-            <div class="  bg-parsiyan text-center text-white  px-4 pt-1 rounded-3">
+            <div class="  bg-parsian text-center text-white  px-4 pt-1 rounded-3">
               <div class="loader-light"></div>
             </div>
           </div>
-          <button v-if="loading == false" type="submit" class=" bg-parsiyan text-center text-white d-inline px-4 py-1 rounded-3">ورود</button>
+          <button v-if="loading == false" type="submit" class=" bg-parsian text-center text-white d-inline px-4 py-1 rounded-3">ورود</button>
         </div>
       </div>
       {{ data }}
@@ -35,7 +35,7 @@ export default {
   methods: {
     async getCustomerInfo() {
       this.loading = true
-      await axios.get(`http://192.168.191.5:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
+      await axios.get(`http://192.168.191.2:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

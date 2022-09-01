@@ -1,8 +1,8 @@
 <template>
-  <div>
-    {{data}}
-    <table class="table rtl bg-white table-bordered">
-      <thead>
+  <div v-if="data">
+   {{data}}
+    <table class="table rounded-3 rtl bg-white table-hover " v-if="data">
+      <thead class="bg-parsian-solid text-white">
         <tr>
           <th scope="col"> ردیف</th>
           <th scope="col">نام کالا</th>
@@ -12,69 +12,62 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>چای</td>
-          <td>10</td>
-          <td>25000</td>
-          <td>250000</td>
+        <tr v-for="(result,index) in data.products" :key="result.id">
+          <th scope="row">{{index}}</th>
+          <td>{{result.product.title}}</td>
+          <td>{{result.count}}</td>
+          <td>{{result.product.price}}</td>
+          <td>{{result.product.price * result.count}}</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>قند</td>
-          <td>40</td>
-          <td>17000</td>
-          <td>255000</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>آب</td>
-          <td>15</td>
-          <td>2200</td>
-          <td>31200</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>بستنی</td>
-          <td>15</td>
-          <td>17000</td>
-          <td>255000</td>
-        </tr>
+      
       </tbody>
-</table>
-<table class="table rtl bg-white table-bordered">
-      <thead>
-        <tr>
-        <th scope="col">
-          <div class="d-flex justify-content-center rtl fw-bold bg-white">
-            <div class="">  جمع کل فاکتور :</div>
-            <div class=""> 5455000 تومان</div>
-          </div>
-        </th>
-          <th scope="col" class=" d-flex justify-content-between"> 
-          نحوه پرداخت:    
-          <div>
-            <div class=" d-inline px-5"><input type="radio" name="payment">چک</div>
-            <div class=" d-inline px-5"><input type="radio" name="payment">نقد</div>
-          </div>
-          </th>
-        </tr>
-      </thead>
-</table>
+    </table>
+
+
+    <div class="rounded-3  m-0 my-3  shadow-t2 bg-white d-flex justify-content-between " style="overflow: hidden;">
+      <div class="">
+      </div>
+      <div class="d-flex align-items-center ">
+        <div class="rtl py-3 pr-3 d-flex align-items-center  ">
+            <div class="px-3 mx-5">
+              <div class="d-flex justify-content-center rtl fw-bold bg-white">
+                <div class=""> جمع کل فاکتور :</div>
+                <div class="px-3"> {{total}} تومان</div>
+              </div>
+            </div>
+            <div  class=" d-flex justify-content-between rounded-3 bg-gray py-3 px-4">
+          <div class="fw-bold">   نحوه پرداخت:
+          </div> 
+              <div class="px-3">
+                <!-- <div class=" d-inline px-5"><input type="radio" name="payment" class="mx-3">چک</div>
+                <div class=" d-inline pe-5"><input type="radio" name="payment" class="mx-3">نقد</div> -->
+                <span v-if="data.is_payment_cash == true">نقد</span>
+                <span v-else>چک</span>
+              </div>
+            </div>
+
+
+        
+        </div>
+        <div class="bg-warning" style="width: 5px !important; height: 100%;"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-      layout: "customer",
-      data(){
-        return{
-          data:{}
-        }
-      },
-      methods: {
+  layout: "customer",
+  data() {
+    return {
+      data: null,
+      total:0
+    }
+  },
+  methods: {
     async getCartInfo() {
-      await axios.get(`http://192.168.191.5:8000/api/product/Small_purchase/${this.$route.params.idPurchase}/`)
+      await axios.get(`http://192.168.191.2:8000/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -84,15 +77,18 @@ export default {
         }).then((response) => {
           this.data = response.data
         });
-    }},
-    mounted(){
-        this.getCartInfo()
+      this.data.products.forEach(element => {
+        this.total += element.product.price * element.count
+      });
     }
+  },
+  mounted() {
+    this.getCartInfo()
+  }
 
 
 }
 </script>
 
 <style>
-
 </style>

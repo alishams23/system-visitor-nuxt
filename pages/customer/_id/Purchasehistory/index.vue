@@ -1,15 +1,14 @@
 <template>
   <div>
-    {{data}}
-  <nuxt-link :to="`${item.id}`"  class="rounded-2  m-0 my-2  shadow-1 bg-white d-flex justify-content-between "  style="overflow: hidden;" v-for="item in data " :key="item.id + 'purchase History'">
+  <nuxt-link :to="`${item.id}`"  class="rounded-3  m-0 my-3  shadow-t2 bg-white d-flex justify-content-between "  style="overflow: hidden;" v-for="item in data " :key="item.id + 'purchase History'">
     <div class="">
     </div>
     <div class="d-flex align-items-center ">
-      
-      <div class="rtl py-3 pr-2">
-          <div class="text-muted pe-3"> تاریخ خرید :{{item.Order_time}}</div>
+      <div class="rtl py-3 pr-3">
+          <div class="text-black fs-6 fw-bold pb-2 pe-4"> تاریخ خرید :{{item.Order_time_jalali}}</div>
+          <div class="text-muted pe-5 fs-7"> تعداد محصولات : {{item.products.length}}</div>
       </div>
-      <div class="bg-warning" style="width: 5px !important; height: 100%;"></div>
+      <div class="bg-parsian" style="width: 5px !important; height: 100%;"></div>
     </div>
   </nuxt-link>
   </div>
@@ -22,12 +21,11 @@ export default {
     data(){
       return{
         data:[],
-
       }
     },
     methods: {
     async getPurchaseHistory() {
-      await axios.get(`http://192.168.191.5:8000/api/product/History_purchase_list/${this.$route.params.id}/`)
+      await axios.get(`http://192.168.191.2:8000/api/product/History_purchase_list/${this.$route.params.id}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -40,8 +38,6 @@ export default {
     }},mounted(){
       this.getPurchaseHistory()
     }
-
-
 }
 </script>
 

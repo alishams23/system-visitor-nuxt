@@ -5,7 +5,7 @@
   <aside id="sidebar" class="sidebar">
    <div>
      <nuxt-link to="Accountant-customer">
-    <div class="rounded my-4" :class="currentRouteName()=='Accountant-customer'?'bg-parsiyan text-white':'text-black text-parsiyan-hover'">
+    <div class="rounded my-4" :class="currentRouteName()=='Accountant-customer'?'bg-parsian text-white':'text-black text-parsian-hover'">
         <div class=" d-flex flex-column justify-content-between py-2 px-2">
             <div class="d-flex justify-content-center">
                 <p class=" fs-6 pe-2 pt-2 ">ورود به حساب مشتریان </p>
@@ -14,7 +14,7 @@
     </div>
     </nuxt-link>
     <nuxt-link to="Accountant-visitor">
-    <div class="rounded  my-4" :class="currentRouteName()=='Accountant-visitor'?'bg-parsiyan text-white':'text-black text-parsiyan-hover'">
+    <div class="rounded  my-4" :class="currentRouteName()=='Accountant-visitor'?'bg-parsian text-white':'text-black text-parsian-hover'">
         <div class=" d-flex flex-column justify-content-between py-2 px-2">
             <div class="d-flex justify-content-center">
                 <p class=" fs-6 pe-2 pt-2 ">ورود به حساب ویزیتور </p>

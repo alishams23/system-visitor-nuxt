@@ -12,7 +12,7 @@
             </div> 
         </div>
     </div>
-    <div class="  bg-parsiyan rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
+    <div class="  bg-parsian rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
       <div class="d-flex justify-content-between">
         <div class="d-flex ps-2 pt-2">
           <div>

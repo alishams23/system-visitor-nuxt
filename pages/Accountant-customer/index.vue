@@ -9,7 +9,7 @@
           <div class=" col-lg-8 col-md-12 col-12  rtl ">
           <label for="customerId" class=" my-4"><span class=" fs-6">کد مشتری را وارد کنید</span></label>
           <input id="customerId" class=" form-control mb-5">
-          <button type="submit" class=" bg-parsiyan text-center text-white d-inline px-4 py-1 rounded-3">ورود</button>
+          <button type="submit" class=" bg-parsian text-center text-white d-inline px-4 py-1 rounded-3">ورود</button>
           </div>
         </div>
         </div>

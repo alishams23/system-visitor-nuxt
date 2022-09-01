@@ -63,7 +63,7 @@
 
 
 <div class=" d-flex justify-content-center">
-<button  type="submit" class=" btn px-5 bg-parsiyan text-white">ثبت</button>
+<button  type="submit" class=" btn px-5 bg-parsian text-white">ثبت</button>
 </div>
 
 
@@ -80,7 +80,7 @@ export default {
       },
       methods: {
     async getCartInfo() {
-      await axios.get(`http://192.168.191.5:8000/api/product/Order_retrieve/<int:pk>/`)
+      await axios.get(`http://192.168.191.2:8000/api/product/Order_retrieve/<int:pk>/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
