@@ -40,7 +40,7 @@ export default {
   },methods:{
     async login(){
       this.loading = true
-      await axios.post("http://192.168.191.2:8000/api/account/login/",{username:this.username,password:this.password}).then((response) => {this.$store.commit("login", {
+      await axios.post("http://192.168.191.4:8000/api/account/login/",{username:this.username,password:this.password}).then((response) => {this.$store.commit("login", {
                 token: response.data.token,
                 username: this.username,})}).then(this.$router.back())
       this.loading=false

@@ -42,7 +42,7 @@
 
 
 
-          <li class="nav-item dropdown pe-3">
+          <li class="nav-item dropdown pe-3" v-if="data">
 
             <a class="nav-link nav-profile d-flex align-items-center pe-0 border p-1 rounded-pill" href="#"
               data-bs-toggle="dropdown">
@@ -56,7 +56,7 @@
                     fill="#200E32" />
                 </svg>
               </div>
-              <span class=" dropdown-toggle px-3">K. Anderson</span>
+              <span class=" dropdown-toggle px-3">{{data.username}}</span>
             </a><!-- End Profile Iamge Icon -->
 
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -117,7 +117,7 @@
 
 <script>
 export default {
-
+props:["data"]
 }
 </script>
 

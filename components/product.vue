@@ -18,7 +18,7 @@
                 </svg>
             </div>
         </div>
-        <div class="card-body d-flex flex-column ">
+        <div class="card-body d-flex flex-column justify-content-between">
             <div>
                 <h5 class="rtl">{{ result.title }}</h5>
                 <div class="d-flex justify-content-between my-2">
@@ -31,9 +31,10 @@
                         class="rounded-pill py-1 mx-1 px-3 fs-7 bg-gray">{{ item.title }}</div>
                 </div>
             </div>
-            <form  @submit.prevent="addToCard">
-                <input type="number" v-model="count" class=" form-control rounded-pill fs-7 my-3 rtl" placeholder="تعداد..." required>
+            <form  @submit.prevent="addToCard" v-if="loading == false">
+                <input type="number" min="1" :max="result.count" v-model="count" class=" form-control rounded-pill fs-7 my-3 rtl"  placeholder="تعداد..." required>
                 <button type="submit"
+                
                     class=" bg-parsian-solid text-center col-12 border-none text-white px-3 py-1 d-flex justify-content-around rounded-pill">
                     <div>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,10 +52,13 @@
                         </svg>
                     </div>
                     <div>ثبت</div>
-                    {{ loading }}
-
                 </button>
             </form>
+                <div v-if="loading == true" class="d-flex  align-items-center">
+                    <div class="  bg-parsian-solid text-center col-12 text-white mt-1 px-4 pt-1 rounded-pill">
+                        <div class="loader-light"></div>
+                    </div>
+                </div>
         </div>
     </div>
 </template>
@@ -83,7 +87,7 @@ export default {
     }, methods: {
         addToCard() {
             this.loading = true
-            axios.get(`http://192.168.191.2:8000/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
+            axios.get(`http://192.168.191.4:8000/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);
@@ -91,6 +95,7 @@ export default {
                         console.log(error.response.headers);
                     }
                 }).then((response) => {
+                    this.result.count = this.result.count - this.count
                     this.loading = false
                 });
         }

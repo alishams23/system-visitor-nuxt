@@ -1,8 +1,9 @@
 <template>
   <div class="">
-    <headerpage />
+    <headerpage :data='{"username":"alishams"}' />
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar d-flex flex-column justify-content-between">
+
       <div>
         <div class="d-flex flex-row align-items-center">
           <div class="col-3 d-flex justify-content-center me-1">
@@ -15,6 +16,8 @@
                   d="M11.9968 12.5837C14.9348 12.5837 17.2888 10.2287 17.2888 7.2917C17.2888 4.3547 14.9348 1.9997 11.9968 1.9997C9.05983 1.9997 6.70483 4.3547 6.70483 7.2917C6.70483 10.2287 9.05983 12.5837 11.9968 12.5837Z"
                   fill="#200E32" />
               </svg>
+
+
             </div>
           </div>
           <div class="rounded-4 col-9  mb-3" v-if="data != null">
@@ -31,28 +34,23 @@
               <div class="loader"></div>
             </div>
           </div>
+
         </div>
 
         <ul class="sidebar-nav pt-3" id="sidebar-nav">
           <li class="nav-item  py-1">
-            <nuxt-link :to="`/customer/${this.$route.params.id}/category`" class="nav-link rtl  rounded-pill "
+            <nuxt-link :to="`/Visitor/loginCustomer`" class="nav-link rtl  rounded-pill "
+              :class="currentRouteCheck('loginCustomer') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
+
+              <span class="my-1 px-3">ورود به حساب مشتریان</span>
+            </nuxt-link>
+          </li>
+
+          <li class="nav-item  py-1">
+            <nuxt-link :to="`/Visitor/category/`" class="nav-link rtl  rounded-pill "
               :class="currentRouteCheck('category') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
-              <span class="my-1 px-3">خرید جدید</span>
-            </nuxt-link>
-          </li>
-          <li class="nav-item  py-1">
-            <nuxt-link :to="`/customer/${this.$route.params.id}/cart`" class="nav-link rtl  rounded-pill "
-              :class="currentRouteCheck('cart') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
-
-              <span class="my-1 px-3">سبد خرید</span>
-            </nuxt-link>
-          </li>
-          <li class="nav-item  py-1">
-            <nuxt-link :to="`/customer/${this.$route.params.id}/Purchasehistory/`" class="nav-link rtl  rounded-pill "
-              :class="currentRouteCheck('Purchasehistory') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
-
-              <span class="my-1 px-3">تاریخچه خرید</span>
+              <span class="my-1 px-3">کاتالگ</span>
             </nuxt-link>
           </li>
           <li class="nav-item py-1">
@@ -104,10 +102,10 @@
 import axios from "axios";
 import headerpage from "~/components/Header.vue"
 export default {
-  layout: 'customer',
+  layout: 'visitor-info',
   // OR
   layout(context) {
-    return 'customer'
+    return 'visitor-info'
   }, data() {
     return {
       data: null

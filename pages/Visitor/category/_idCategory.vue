@@ -19,7 +19,7 @@ import axios from "axios"
 import product from '@/components/product.vue'
 
 export default {
-  layout: "customer",
+  layout: "visitor",
   components: {
     product
   },
