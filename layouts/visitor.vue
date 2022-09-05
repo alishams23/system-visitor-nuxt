@@ -6,6 +6,7 @@
 
       <div>
         <div class="d-flex flex-row align-items-center">
+          {{data}}
           <div class="col-3 d-flex justify-content-center me-1">
             <div class="p-3 rounded-pill bg-gray">
               <svg width="34" height="34" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -54,15 +55,16 @@
             </nuxt-link>
           </li>
           <li class="nav-item py-1">
-            <nuxt-link to="/Visitor/loginCustomer" class="nav-link rtl   rounded-pill "
+            <div @click="logout()" class="nav-link rtl   rounded-pill "
               :class="currentRouteCheck('exit') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
               <span class="my-1 px-3">خروج</span>
-            </nuxt-link>
+            </div>
           </li>
         </ul>
       </div>
       <div class="bg-parsian rounded-4">
+        
         <div v-if="data != null"
           class="  background-wallet rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
           <div class="d-flex justify-content-between">
@@ -121,12 +123,14 @@ export default {
       return this.$route.name;
     }, currentRouteCheck(data) {
       return this.$route.name.split("-").includes(data);
+    },logout(){
+      this.$store.commit("logout")
     }
   }, beforeMount() {
     this.$store.commit("onStart");
   }, mounted() {
-    if (this.$route.params.id) {
-      axios.get(`http://192.168.191.4:8000/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+    
+      axios.get(`http://192.168.191.4:8000/api/account/User_retrieve/${this.$store.state.username}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -137,7 +141,7 @@ export default {
           this.data = response.data
 
         });
-    }
+   
   }
 }
 </script>
