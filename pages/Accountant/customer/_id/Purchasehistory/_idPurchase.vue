@@ -1,6 +1,7 @@
 <template>
   <div v-if="data">
     <table class="table rounded-3 rtl bg-white table-hover " v-if="data">
+      {{data}}
       <thead class="bg-parsian-solid text-white">
         <tr>
           <th scope="col"> ردیف</th>
@@ -44,6 +45,17 @@
         </div>
         <div class="bg-warning" style="width: 5px !important; height: 100%;"></div>
       </div>
+
+    </div>
+    <div class="rtl">
+      <div v-if="loading == true" class="d-flex  align-items-center">
+        <div class="  bg-parsian-solid text-center text-white  px-4 pt-1 rounded-pill">
+          <div class="loader-light"></div>
+        </div>
+      </div>
+      <button v-if="loading == false" @click="accept()"
+        class="border-none bg-parsian-solid text-center text-white d-inline px-5 py-2 rounded-pill m-3">ثبت
+        نهایی</button>
     </div>
   </div>
 </template>
@@ -55,7 +67,8 @@ export default {
   data() {
     return {
       data: null,
-      total: 0
+      total: 0,
+      loading: false
     }
   },
   methods: {
@@ -73,6 +86,21 @@ export default {
       this.data.products.forEach(element => {
         this.total += element.product.price * element.count
       });
+    },
+    async accept() {
+      this.loading = true
+      await axios.get(`http://127.0.0.1:8000/api/accountant/Visitor_registrations_list/${this.data.visitor.id}/`)
+        .then((response) => {
+          this.loading = false
+        }).catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        });
+
+
     }
   },
   mounted() {
@@ -82,4 +110,5 @@ export default {
 </script>
 
 <style>
+
 </style>
