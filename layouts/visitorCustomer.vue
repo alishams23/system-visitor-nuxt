@@ -104,10 +104,10 @@
 import axios from "axios";
 import headerpage from "~/components/Header.vue"
 export default {
-  layout: 'VisitorCustomer',
+  layout: 'visitorCustomer',
   // OR
   layout(context) {
-    return 'VisitorCustomer'
+    return 'visitorCustomer'
   }, data() {
     return {
       data: null
