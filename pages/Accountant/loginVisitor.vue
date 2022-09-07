@@ -3,10 +3,10 @@
         <form @submit.prevent="getCustomerInfo"
             class=" col-lg-8 col-md-11 col-11 bg-white p-4 py-5 rounded-4 shadow-t2">
             <div class=" text-center text-parsian  mt-2">
-                <h4 class="fw-bold">ورود به حساب مشتریان</h4>
+                <h4 class="fw-bold">ورود به حساب ویزیتور</h4>
             </div>
             <div class="mt-3 text-center text-danger" v-if="errorLogin == true">
-            کد مشتری اشتباه میباشد
+            کد ویزیتور اشتباه میباشد
           </div>
             <div class="row justify-content-center">
                 <div class=" col-lg-8 col-md-12 col-12  rtl ">
@@ -30,7 +30,7 @@
 import axios from 'axios'
 import headerpage from "~/components/Header.vue"
 export default {
-    layout: 'visitor',
+    layout: 'accountant',
     
     data() {
         return {

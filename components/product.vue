@@ -31,7 +31,7 @@
                         class="rounded-pill py-1 mx-1 px-3 fs-7 bg-gray">{{ item.title }}</div>
                 </div>
             </div>
-            <form  @submit.prevent="addToCard" v-if="loading == false">
+            <form  @submit.prevent="addToCard" v-if="loading == false && customer">
                 <input type="number" min="1" :max="result.count" v-model="count" class=" form-control rounded-pill fs-7 my-3 rtl"  placeholder="تعداد..." required>
                 <button type="submit"
                 
@@ -87,7 +87,7 @@ export default {
     }, methods: {
         addToCard() {
             this.loading = true
-            axios.get(`http://192.168.191.4:8000/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
+            axios.get(`http://127.0.0.1:8000/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);

@@ -38,7 +38,7 @@ export const mutations = {
         state.username = ''
         localStorage.removeItem("token")
         localStorage.removeItem("username")
-        this.app.router.push("/t/login")
+        this.app.router.push("/login")
     },
 
     checkLogin(state) {

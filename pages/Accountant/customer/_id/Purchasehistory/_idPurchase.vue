@@ -18,7 +18,6 @@
           <td>{{ result.product.price }}</td>
           <td>{{ result.product.price * result.count }}</td>
         </tr>
-
       </tbody>
     </table>
 
@@ -52,7 +51,7 @@
 <script>
 import axios from 'axios'
 export default {
-  layout: "customer",
+  layout: "accountantCustomer",
   data() {
     return {
       data: null,
@@ -61,7 +60,7 @@ export default {
   },
   methods: {
     async getCartInfo() {
-      await axios.get(`http://192.168.191.4:8000/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
+      await axios.get(`http://127.0.0.1:8000/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -79,8 +78,6 @@ export default {
   mounted() {
     this.getCartInfo()
   }
-
-
 }
 </script>
 

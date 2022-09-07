@@ -30,7 +30,7 @@
 import axios from 'axios'
 import headerpage from "~/components/Header.vue"
 export default {
-    layout: 'visitor',
+    layout: 'accountant',
     
     data() {
         return {
@@ -46,7 +46,7 @@ export default {
             await axios.get(`http://127.0.0.1:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
                .then((response) => {
                     this.data = response.data
-                    this.$router.push({ path: `/Visitor/customer/${this.customerId}/category/`, });
+                    this.$router.push({ path: `/Accountant/customer/${this.customerId}/PurchaseHistory/`, });
                 }).catch( (error) => {
                     if (error.response) {
                         console.log(error.response.data);

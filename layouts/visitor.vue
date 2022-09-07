@@ -1,12 +1,11 @@
 <template>
   <div class="">
-    <headerpage :data='{"username":"alishams"}' />
+    <headerpage :data='data' />
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar d-flex flex-column justify-content-between">
-
       <div>
         <div class="d-flex flex-row align-items-center">
-          {{data}}
+          <!-- {{ data }} -->
           <div class="col-3 d-flex justify-content-center me-1">
             <div class="p-3 rounded-pill bg-gray">
               <svg width="34" height="34" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -17,16 +16,14 @@
                   d="M11.9968 12.5837C14.9348 12.5837 17.2888 10.2287 17.2888 7.2917C17.2888 4.3547 14.9348 1.9997 11.9968 1.9997C9.05983 1.9997 6.70483 4.3547 6.70483 7.2917C6.70483 10.2287 9.05983 12.5837 11.9968 12.5837Z"
                   fill="#200E32" />
               </svg>
-
-
             </div>
           </div>
           <div class="rounded-4 col-9  mb-3" v-if="data != null">
             <div class=" d-flex flex-column justify-content-between py-2 ">
               <div class=" d-flex flex-column justify-content-between py-1 rtl">
-                <div class=" py-2  fs-5 rtl fw-bold"> فروشگاه :{{ data.name_shop }}</div>
-                <div class=" pb-2  "> آقای :{{ data.first_name }} {{ data.last_name }} </div>
-                <div class=" pt-2  fs-7 lead text-muted">تلفن تماس:{{ data.Phone_number }} </div>
+                <div class=" py-2  fs-5 rtl fw-bold"> یوزر :{{ data.username }}</div>
+                <div class=" pb-2  "> نام :{{ data.get_full_name }} </div>
+
               </div>
             </div>
           </div>
@@ -35,9 +32,7 @@
               <div class="loader"></div>
             </div>
           </div>
-
         </div>
-
         <ul class="sidebar-nav pt-3" id="sidebar-nav">
           <li class="nav-item  py-1">
             <nuxt-link :to="`/Visitor/loginCustomer`" class="nav-link rtl  rounded-pill "
@@ -64,7 +59,7 @@
         </ul>
       </div>
       <div class="bg-parsian rounded-4">
-        
+
         <div v-if="data != null"
           class="  background-wallet rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
           <div class="d-flex justify-content-between">
@@ -123,25 +118,25 @@ export default {
       return this.$route.name;
     }, currentRouteCheck(data) {
       return this.$route.name.split("-").includes(data);
-    },logout(){
+    }, logout() {
       this.$store.commit("logout")
     }
   }, beforeMount() {
     this.$store.commit("onStart");
   }, mounted() {
-    
-      axios.get(`http://192.168.191.4:8000/api/account/User_retrieve/${this.$store.state.username}/`)
-        .catch(function (error) {
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          }
-        }).then((response) => {
-          this.data = response.data
 
-        });
-   
+    axios.get(`http://127.0.0.1:8000/api/account/User_retrieve/${this.$store.state.username}/`)
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      }).then((response) => {
+        this.data = response.data
+
+      });
+
   }
 }
 </script>

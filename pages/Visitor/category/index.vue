@@ -27,7 +27,7 @@ export default {
     layout: "visitor",
     methods:{
       async getData(){
-       await axios.get(`http://192.168.191.4:8000/api/product/Category_list/`)
+       await axios.get(`http://127.0.0.1:8000/api/product/Category_list/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

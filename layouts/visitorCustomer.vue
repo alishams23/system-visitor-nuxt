@@ -35,29 +35,29 @@
 
         <ul class="sidebar-nav pt-3" id="sidebar-nav">
           <li class="nav-item  py-1">
-            <nuxt-link :to="`/customer/${this.$route.params.id}/category`" class="nav-link rtl  rounded-pill "
+            <nuxt-link :to="`/Visitor/customer/${this.$route.params.id}/category`" class="nav-link rtl  rounded-pill "
               :class="currentRouteCheck('category') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
               <span class="my-1 px-3">خرید جدید</span>
             </nuxt-link>
           </li>
           <li class="nav-item  py-1">
-            <nuxt-link :to="`/customer/${this.$route.params.id}/cart`" class="nav-link rtl  rounded-pill "
+            <nuxt-link :to="`/Visitor/customer/${this.$route.params.id}/cart`" class="nav-link rtl  rounded-pill "
               :class="currentRouteCheck('cart') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
               <span class="my-1 px-3">سبد خرید</span>
             </nuxt-link>
           </li>
           <li class="nav-item  py-1">
-            <nuxt-link :to="`/customer/${this.$route.params.id}/Purchasehistory/`" class="nav-link rtl  rounded-pill "
+            <nuxt-link :to="`/Visitor/customer/${this.$route.params.id}/Purchasehistory/`" class="nav-link rtl  rounded-pill "
               :class="currentRouteCheck('Purchasehistory') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
               <span class="my-1 px-3">تاریخچه خرید</span>
             </nuxt-link>
           </li>
           <li class="nav-item py-1">
-            <nuxt-link to="/Visitor/loginCustomer" class="nav-link rtl   rounded-pill "
-              :class="currentRouteCheck('exit') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
+            <nuxt-link to="/Visitor/loginCustomer" class="nav-link rtl   rounded-pill text-black text-parsian-hover"
+              >
 
               <span class="my-1 px-3">خروج</span>
             </nuxt-link>
@@ -104,10 +104,10 @@
 import axios from "axios";
 import headerpage from "~/components/Header.vue"
 export default {
-  layout: 'customer',
+  layout: 'VisitorCustomer',
   // OR
   layout(context) {
-    return 'customer'
+    return 'VisitorCustomer'
   }, data() {
     return {
       data: null
@@ -128,7 +128,7 @@ export default {
     this.$store.commit("onStart");
   }, mounted() {
     if (this.$route.params.id) {
-      axios.get(`http://192.168.191.4:8000/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+      axios.get(`http://127.0.0.1:8000/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

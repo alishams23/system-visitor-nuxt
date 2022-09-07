@@ -1,7 +1,7 @@
 <template>
 <div>
 
-  <nuxt-link :to="`/customer/${$route.params.id}/category/${result.id}/`"  class="rounded-3  m-0 my-3  shadow-t2 bg-white d-flex justify-content-between "  style="overflow: hidden;" v-for="result in data" :key="result.id + 'category'">
+  <nuxt-link :to="`/Visitor/customer/${$route.params.id}/category/${result.id}/`"  class="rounded-3  m-0 my-3  shadow-t2 bg-white d-flex justify-content-between "  style="overflow: hidden;" v-for="result in data" :key="result.id + 'category'">
     <div class="">
     </div>
     <div class="d-flex align-items-center ">
@@ -24,10 +24,10 @@ export default {
       data:[],
     }
   },
-    layout: "customer",
+    layout: "visitorCustomer",
     methods:{
       async getData(){
-       await axios.get(`http://192.168.191.4:8000/api/product/Category_list/`)
+       await axios.get(`http://127.0.0.1:8000/api/product/Category_list/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

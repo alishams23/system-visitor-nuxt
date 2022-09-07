@@ -1,11 +1,10 @@
 <template>
     <div class="">
-        <headerpage :data='data' />
+        <headerpage />
         <!-- ======= Sidebar ======= -->
         <aside id="sidebar" class="sidebar d-flex flex-column justify-content-between">
             <div>
                 <div class="d-flex flex-row align-items-center">
-                    <!-- {{ data }} -->
                     <div class="col-3 d-flex justify-content-center me-1">
                         <div class="p-3 rounded-pill bg-gray">
                             <svg width="34" height="34" viewBox="0 0 24 24" fill="black"
@@ -22,9 +21,9 @@
                     <div class="rounded-4 col-9  mb-3" v-if="data != null">
                         <div class=" d-flex flex-column justify-content-between py-2 ">
                             <div class=" d-flex flex-column justify-content-between py-1 rtl">
-                                <div class=" py-2  fs-5 rtl fw-bold"> یوزر :{{ data.username }}</div>
-                                <div class=" pb-2  "> نام :{{ data.get_full_name }} </div>
-
+                                <div class=" py-2  fs-5 rtl fw-bold"> فروشگاه :{{ data.name_shop }}</div>
+                                <div class=" pb-2  "> آقای :{{ data.first_name }} {{ data.last_name }} </div>
+                                <div class=" pt-2  fs-7 lead text-muted">تلفن تماس:{{ data.Phone_number }} </div>
                             </div>
                         </div>
                     </div>
@@ -34,33 +33,26 @@
                         </div>
                     </div>
                 </div>
+
                 <ul class="sidebar-nav pt-3" id="sidebar-nav">
                     <li class="nav-item  py-1">
-                        <nuxt-link :to="`/Accountant/loginCustomer`" class="nav-link rtl  rounded-pill "
-                            :class="currentRouteCheck('loginCustomer') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
+                        <nuxt-link :to="`/Accountant/customer/${this.$route.params.id}/Purchasehistory/`"
+                            class="nav-link rtl  rounded-pill "
+                            :class="currentRouteCheck('Purchasehistory') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
-                            <span class="my-1 px-3">ورود به حساب مشتریان</span>
-                        </nuxt-link>
-                    </li>
-
-                    <li class="nav-item  py-1">
-                        <nuxt-link :to="`/Accountant/loginVisitor/`" class="nav-link rtl  rounded-pill "
-                            :class="currentRouteCheck('loginVisitor') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
-
-                            <span class="my-1 px-3">ورود به حساب ویزیتور</span>
+                            <span class="my-1 px-3">تاریخچه خرید</span>
                         </nuxt-link>
                     </li>
                     <li class="nav-item py-1">
-                        <div @click="logout()" class="nav-link rtl   rounded-pill "
-                            :class="currentRouteCheck('exit') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
+                        <nuxt-link to="/Accountant/loginCustomer" class="nav-link rtl   rounded-pill text-black text-parsian-hover"
+                            >
 
                             <span class="my-1 px-3">خروج</span>
-                        </div>
+                        </nuxt-link>
                     </li>
                 </ul>
             </div>
             <div class="bg-parsian rounded-4">
-
                 <div v-if="data != null"
                     class="  background-wallet rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
                     <div class="d-flex justify-content-between">
@@ -100,10 +92,10 @@
 import axios from "axios";
 import headerpage from "~/components/Header.vue"
 export default {
-    layout: 'accountant',
+    layout: 'accountantCustomer',
     // OR
     layout(context) {
-        return 'accountant'
+        return 'accountantCustomer'
     }, data() {
         return {
             data: null
@@ -119,25 +111,23 @@ export default {
             return this.$route.name;
         }, currentRouteCheck(data) {
             return this.$route.name.split("-").includes(data);
-        }, logout() {
-            this.$store.commit("logout")
         }
     }, beforeMount() {
         this.$store.commit("onStart");
     }, mounted() {
+        if (this.$route.params.id) {
+            axios.get(`http://127.0.0.1:8000/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    }
+                }).then((response) => {
+                    this.data = response.data
 
-        axios.get(`http://127.0.0.1:8000/api/account/User_retrieve/${this.$store.state.username}/`)
-            .catch(function (error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                }
-            }).then((response) => {
-                this.data = response.data
-
-            });
-
+                });
+        }
     }
 }
 </script>

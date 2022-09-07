@@ -19,7 +19,7 @@ import axios from "axios"
 import product from '@/components/product.vue'
 
 export default {
-  layout: "customer",
+  layout: "visitorCustomer",
   components: {
     product
   },
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     async getData() {
-      await axios.get(`http://192.168.191.4:8000/api/product/product_list/${this.$route.params.idCategory}/`)
+      await axios.get(`http://127.0.0.1:8000/api/product/product_list/${this.$route.params.idCategory}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
