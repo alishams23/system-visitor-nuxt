@@ -1,55 +1,74 @@
 <template>
   <div class="">
-  <headerpage/>
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-    <div class="rounded bg-parsian mb-5">
-        <div class=" d-flex flex-column justify-content-between py-2 px-2">
-            <div class="d-flex justify-content-center">
-                <p class=" fs-6 pe-2 pt-2 text-white ">:نام ویزیتور </p>
-            </div> 
-        </div>
+    <div class="d-flex justify-content-center align-items-center mt-5 pt-5 full-height" >
+      <div class="loader"></div>
     </div>
-    <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-        <nuxt-link to="Visitor" class="nav-link rtl text-dark" :class="currentRouteName() == 'Visitor' ? 'bg-parsian text-white':'text-black text-parsian-hover'">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi ms-2 bi-person" viewBox="0 0 16 16">
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-          </svg>
-          <span class=" fw-light">ورود به حساب مشتریان</span>
-        </nuxt-link>
-      </li>
-      <li class="nav-item">
-        <nuxt-link to="Opencatalog" class="nav-link rtl text-dark" :class="currentRouteName() == 'Opencatalog' ? 'bg-parsian text-white':'text-black text-parsian-hover'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi ms-2   bi-file-earmark" viewBox="0 0 16 16">
-              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-            </svg>
-          <span class=" fw-light">کاتالوگ</span>
-        </nuxt-link>
-      </li>
-    </ul>
-
-  </aside><!-- End Sidebar-->
-  <main id="main" class="main">
-      <nuxt></nuxt>
-  </main>
-
+    <div v-if="allow==true"><nuxt></nuxt></div>
   </div>
 </template>
 
 <script>
-import headerpage from "~/components/Header.vue"
+import headerpage from "~/components/Header.vue";
 export default {
-components:{headerpage,},
-methods:{
+  components: { headerpage },
+  data(){return{allow:false}},
+  computed: {
+    isAuthenticated: {
+      get() {
+        return this.$store.state.isAuthenticated;
+      }
+    }
+  },
+  methods: {
     currentRouteName() {
       return this.$route.name;
-        }
+    },getInfo() {
+      try {
+        fetch(
+          `https://treaget.com/api/UserRetrieveApi/${this.$store.state.username}/`,
+          {
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          }
+        )
+          .then(response => response.json())
+          .then(data => {
+            this.$store.commit("getUser", data);
+          });
+        this.loading = false;
+      } catch (error) {}
+    },loginPage() {
+      if (
+        this.isAuthenticated == true ||this.$route.name == "login" 
+      ) {
+        this.allow = true;
+        this.getInfo();
+      } else {
+        this.$router.push("/login");
+      }
     }
-
-}
+  },mounted(){
+    this.loginPage()
+  },beforeMount() {
+    this.$store.commit("onStart");
+  },watch: {
+    $route(to, from) {
+      this.loginPage();
+    }
+  },
+};
 </script>
 
-<style>
+<style scoped>
+  html, body {
+  height: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
 
 </style>
