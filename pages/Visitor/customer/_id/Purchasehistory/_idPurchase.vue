@@ -3,11 +3,11 @@
     <table class="table rounded-3 rtl bg-white table-hover " v-if="data">
       <thead class="bg-parsian-solid text-white">
         <tr>
-          <th scope="col"> ردیف</th>
+          <th scope="col" class="rounded-end"> ردیف</th>
           <th scope="col">نام کالا</th>
           <th scope="col">تعداد</th>
           <th scope="col">قیمت واحد</th>
-          <th scope="col">جمع کل</th>
+          <th scope="col" class="rounded-start">جمع کل</th>
         </tr>
       </thead>
       <tbody>

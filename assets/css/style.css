@@ -1338,6 +1338,12 @@ font-size: 0.8rem !important;
     color:#6e0096 !important ;
 }
 
+
+.bg-succeed-light {
+    background: #effdf6;
+    color:#009643 !important ;
+}
+
 .rtl {
     direction: rtl !important;
 }

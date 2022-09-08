@@ -21,7 +21,6 @@
                         class=" bg-parsian-solid border-none text-center text-white d-inline px-5 py-2 rounded-pill">ورود</button>
                 </div>
             </div>
-          
         </form>
     </div>
 </template>
@@ -30,8 +29,7 @@
 import axios from 'axios'
 import headerpage from "~/components/Header.vue"
 export default {
-    layout: 'accountant',
-    
+    layout: 'accountant',   
     data() {
         return {
             customerId: null,

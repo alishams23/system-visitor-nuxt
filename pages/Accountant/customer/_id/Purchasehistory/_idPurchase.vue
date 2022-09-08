@@ -1,18 +1,17 @@
 <template>
   <div v-if="data">
-    <table class="table rounded-3 rtl bg-white table-hover " v-if="data">
-      {{data}}
-      <thead class="bg-parsian-solid text-white">
-        <tr>
-          <th scope="col"> ردیف</th>
+    <table class="table rounded-3 rtl  table-hover " v-if="data">
+      <thead class="bg-parsian-solid text-white ">
+        <tr >
+          <th scope="col" class="rounded-end"> ردیف</th>
           <th scope="col">نام کالا</th>
           <th scope="col">تعداد</th>
           <th scope="col">قیمت واحد</th>
-          <th scope="col">جمع کل</th>
+          <th scope="col" class="rounded-start">جمع کل</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(result, index) in data.products" :key="result.id">
+        <tr v-for="(result, index) in data.products" class="bg-white" :key="result.id">
           <th scope="row">{{ index }}</th>
           <td>{{ result.product.title }}</td>
           <td>{{ result.count }}</td>
@@ -43,19 +42,18 @@
             </div>
           </div>
         </div>
-        <div class="bg-warning" style="width: 5px !important; height: 100%;"></div>
+        <div class="bg-parsian-solid" style="width: 5px !important; height: 100%;"></div>
       </div>
 
     </div>
     <div class="rtl">
-      <div v-if="loading == true" class="d-flex  align-items-center">
-        <div class="  bg-parsian-solid text-center text-white  px-4 pt-1 rounded-pill">
-          <div class="loader-light"></div>
-        </div>
-      </div>
-      <button v-if="loading == false" @click="accept()"
+      <button v-if="loading == true" @click="accept()"
+        class="border-none bg-parsian-solid text-center text-white d-inline px-5 py-2 rounded-pill m-3"> <div class="loader-light"></div></button>
+      <button v-if="loading == false && data.check_Accountants != true" @click="accept()"
         class="border-none bg-parsian-solid text-center text-white d-inline px-5 py-2 rounded-pill m-3">ثبت
         نهایی</button>
+        <button v-if="loading == false && data.check_Accountants == true" @click="accept()"
+        class="border-none bg-danger text-center text-white d-inline px-5 py-2 rounded-pill m-3">لغو ثبت</button>
     </div>
   </div>
 </template>
@@ -89,9 +87,9 @@ export default {
     },
     async accept() {
       this.loading = true
-      await axios.get(`http://127.0.0.1:8000/api/accountant/Visitor_registrations_list/${this.data.visitor.id}/`)
+      await axios.get(`http://127.0.0.1:8000/api/accountant/confirm_Order/${this.data.id}/`)
         .then((response) => {
-          this.loading = false
+          this.loading = false;this.data.check_Accountants=!this.data.check_Accountants
         }).catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
