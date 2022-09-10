@@ -58,34 +58,7 @@
           </li>
         </ul>
       </div>
-      <div class="bg-parsian rounded-4">
-
-        <div v-if="data != null"
-          class="  background-wallet rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
-          <div class="d-flex justify-content-between">
-            <div class="d-flex ps-2 pt-2">
-              <div>
-
-              </div>
-              <div class="ps-2">
-                <div class=" d-flex justify-content-center align-items-center w-8 h-8">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="white" viewBox="0 0 16 16"
-                    class="bi bi-wallet2">
-                    <path
-                      d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z">
-                    </path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <p class="text-white fs-6 pe-2 pt-2">خرید</p>
-          </div>
-          <div class="text-white d-flex justify-content-end">
-            <p class="fs-xs my-1 px-3  pt-2">تومان</p>
-            <p class="pe-3 pt-2 fs-5">{{ data.payment_invoice }}</p>
-          </div>
-        </div>
-      </div>
+    
 
     </aside>
     <main id="main" class="main">

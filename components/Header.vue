@@ -3,24 +3,25 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
       <div class="d-flex align-items-center justify-content-between">
-        <div class="logo d-flex align-items-center">
-
-          <!-- <span class="d-none d-lg-block">پخش پارسیان</span> -->
-        </div>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-      </div><!-- End Logo -->
-
-
-
+        <a class="logo d-flex align-items-center">
+          <i class="toggle-sidebar-btn" v-if="sidebar ==true" @click="toggleBodyClass( 'toggle-sidebar')"><svg
+            xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="black" class="bi bi-list"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+          </svg></i>
+        </a>
+        <i class="toggle-sidebar-btn" v-if="sidebar ==false" @click="toggleBodyClass( 'toggle-sidebar')"><svg
+            xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="black" class="bi bi-list"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+          </svg></i>
+      </div>
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-
-
-
           <!-- <li class="nav-item dropdown  me-3">
-
             <a class="nav-link nav-profile d-flex align-items-center  p-1 rounded-pill">
-
               <div class="rounded-pill p-2 bg-gray">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
@@ -30,18 +31,10 @@
                     d="M9.55493 20.8518C10.0542 21.4785 10.7874 21.884 11.5922 21.9788C12.3971 22.0735 13.2072 21.8495 13.8433 21.3564C14.0389 21.2106 14.2149 21.041 14.3672 20.8518"
                     stroke="#200E32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-
-
               </div>
-
               <span class="badge bg-primary badge-number">4</span>
             </a>
-
-
           </li> -->
-
-
-
           <li class="nav-item dropdown pe-3" v-if="data">
 
             <a class="nav-link nav-profile d-flex align-items-center pe-0 border p-1 rounded-pill" href="#"
@@ -117,9 +110,25 @@
 
 <script>
 export default {
-props:["data"]
+  props: ["data"],data(){
+    return{
+      sidebar:true
+    }
+  }, methods: {
+    toggleBodyClass(className) {
+      const el = document.body;
+      el.classList.toggle(className);
+      this.sidebar = !this.sidebar
+    },
+  }, mounted() {
+    this.toggleBodyClass('addClass', 'yourClassName');
+  },
+  destroyed() {
+    this.toggleBodyClass('removeClass', 'yourClassName');
+  }
 }
 </script>
 
 <style>
+
 </style>

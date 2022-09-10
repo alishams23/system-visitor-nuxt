@@ -9,7 +9,7 @@
     >
       <div class=""></div>
       <div class="col-12 d-flex align-items-center justify-content-end flex-row">
-        <div class="d-flex align-items-center flex-wrap justify-content-between rtl col-11 py-3 pr-3">
+        <div class="d-flex flex-wrap align-items-center justify-content-between  rtl col-11 py-3 pr-3">
           <div >
             <div class="text-black fs-6 fw-bold pb-2 pe-4">
               تاریخ خرید :{{ item.Order_time_jalali }}
@@ -18,6 +18,7 @@
               تعداد محصولات : {{ item.products.length }}
             </div>
           </div>
+          
           <div v-if="item.check_Accountants == true" class="rtl rounded-pill bg-succeed-light py-2 mt-1 mx-3 px-5">
             <div class=" fw-bold fs-7">ثبت شده</div>
           </div>
@@ -35,7 +36,7 @@
 <script>
 import axios from "axios";
 export default {
-  layout: "accountantCustomer",
+  layout: "accountantVisitor",
   data() {
     return {
       data: [],
@@ -45,7 +46,7 @@ export default {
     async getPurchaseHistory() {
       await axios
         .get(
-          `http://127.0.0.1:8000/api/product/History_purchase_list/${this.$route.params.id}/`
+          `http://127.0.0.1:8000/api/accountant/Visitor_registrations_list/${this.$route.params.id}/`
         )
         .catch(function (error) {
           if (error.response) {

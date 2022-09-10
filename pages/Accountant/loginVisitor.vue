@@ -6,12 +6,12 @@
                 <h4 class="fw-bold">ورود به حساب ویزیتور</h4>
             </div>
             <div class="mt-3 text-center text-danger" v-if="errorLogin == true">
-            کد ویزیتور اشتباه میباشد
+            یوزنیم ویزیتور اشتباه میباشد
           </div>
             <div class="row justify-content-center">
                 <div class=" col-lg-8 col-md-12 col-12  rtl ">
-                    <label for="customerId" class=" my-4 text-muted"><span class=" fs-6">کد مشتری را وارد کنید</span></label>
-                    <input id="customerId" v-model="customerId" class=" form-control mb-5">
+                    <label for="visitorId" class=" my-4 text-muted"><span class=" fs-6">یوزنیم ویزیتور را وارد کنید</span></label>
+                    <input id="visitorId" v-model="visitorId" class=" form-control mb-5">
                     <div v-if="loading == true" class="d-flex  align-items-center">
                         <div class="  bg-parsian text-center text-white  px-4 pt-1 rounded-3">
                             <div class="loader-light"></div>
@@ -34,7 +34,7 @@ export default {
     
     data() {
         return {
-            customerId: null,
+            visitorId: null,
             data: {},
             loading: false,
             errorLogin:false
@@ -43,10 +43,10 @@ export default {
     methods: {
         async getCustomerInfo() {
             this.loading = true
-            await axios.get(`http://127.0.0.1:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
+            await axios.get(`http://127.0.0.1:8000/api/account/User_retrieve/${this.visitorId}/`)
                .then((response) => {
                     this.data = response.data
-                    this.$router.push({ path: `/Visitor/customer/${this.customerId}/category/`, });
+                    this.$router.push({ path: `/Accountant/visitor/${this.visitorId}/Purchasehistory/`, });
                 }).catch( (error) => {
                     if (error.response) {
                         console.log(error.response.data);

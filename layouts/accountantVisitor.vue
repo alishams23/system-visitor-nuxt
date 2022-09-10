@@ -1,11 +1,10 @@
 <template>
     <div class="">
-        <headerpage :data='data' />
+        <headerpage />
         <!-- ======= Sidebar ======= -->
         <aside id="sidebar" class="sidebar d-flex flex-column justify-content-between">
             <div>
                 <div class="d-flex flex-row align-items-center">
-                    <!-- {{ data }} -->
                     <div class="col-3 d-flex justify-content-center me-1">
                         <div class="p-3 rounded-pill bg-gray">
                             <svg width="34" height="34" viewBox="0 0 24 24" fill="black"
@@ -34,32 +33,26 @@
                         </div>
                     </div>
                 </div>
+
                 <ul class="sidebar-nav pt-3" id="sidebar-nav">
                     <li class="nav-item  py-1">
-                        <nuxt-link :to="`/Accountant/loginCustomer`" class="nav-link rtl  rounded-pill "
-                            :class="currentRouteCheck('loginCustomer') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
+                        <nuxt-link :to="`/Accountant/visitor/${this.$route.params.id}/Purchasehistory/`"
+                            class="nav-link rtl  rounded-pill "
+                            :class="currentRouteCheck('Purchasehistory') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
 
-                            <span class="my-1 px-3">ورود به حساب مشتریان</span>
-                        </nuxt-link>
-                    </li>
-
-                    <li class="nav-item  py-1">
-                        <nuxt-link :to="`/Accountant/loginVisitor/`" class="nav-link rtl  rounded-pill "
-                            :class="currentRouteCheck('loginVisitor') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
-
-                            <span class="my-1 px-3">ورود به حساب ویزیتور</span>
+                            <span class="my-1 px-3">تاریخچه فروش</span>
                         </nuxt-link>
                     </li>
                     <li class="nav-item py-1">
-                        <div @click="logout()" class="nav-link rtl   rounded-pill "
-                            :class="currentRouteCheck('exit') ? 'bg-parsian-light  ' : 'text-black text-parsian-hover'">
+                        <nuxt-link to="/Accountant/loginVisitor"
+                            class="nav-link rtl   rounded-pill text-black text-parsian-hover">
 
                             <span class="my-1 px-3">خروج</span>
-                        </div>
+                        </nuxt-link>
                     </li>
                 </ul>
             </div>
-       
+          
 
         </aside>
         <main id="main" class="main">
@@ -69,14 +62,14 @@
     </div>
 </template>
   
-  <script>
+<script>
 import axios from "axios";
 import headerpage from "~/components/Header.vue"
 export default {
-    layout: 'accountant',
+    layout: 'accountantVisitor',
     // OR
     layout(context) {
-        return 'accountant'
+        return 'accountantVisitor'
     }, data() {
         return {
             data: null
@@ -92,28 +85,27 @@ export default {
             return this.$route.name;
         }, currentRouteCheck(data) {
             return this.$route.name.split("-").includes(data);
-        }, logout() {
-            this.$store.commit("logout")
         }
     }, beforeMount() {
         this.$store.commit("onStart");
     }, mounted() {
+        if (this.$route.params.id) {
+            axios.get(`http://127.0.0.1:8000/api/account/User_retrieve/${this.$route.params.id}/`)
+                .catch(function (error) {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    }
+                }).then((response) => {
+                    this.data = response.data
 
-        axios.get(`http://127.0.0.1:8000/api/account/User_retrieve/${this.$store.state.username}/`)
-            .catch(function (error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                }
-            }).then((response) => {
-                this.data = response.data
-
-            });
-
+                });
+        }
     }
 }
 </script>
   
-  <style>
-  </style>
+<style>
+
+</style>
