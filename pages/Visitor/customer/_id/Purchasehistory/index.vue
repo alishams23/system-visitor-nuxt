@@ -25,7 +25,7 @@ export default {
     },
     methods: {
     async getPurchaseHistory() {
-      await axios.get(`http://127.0.0.1:8000/api/product/History_purchase_list/${this.$route.params.id}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/History_purchase_list/${this.$route.params.id}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

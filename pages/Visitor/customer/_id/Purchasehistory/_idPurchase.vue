@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     async getCartInfo() {
-      await axios.get(`http://127.0.0.1:8000/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

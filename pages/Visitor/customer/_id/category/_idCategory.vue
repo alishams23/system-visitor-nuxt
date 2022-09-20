@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     async getData() {
-      await axios.get(`http://127.0.0.1:8000/api/product/product_list/${this.$route.params.idCategory}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/product_list/${this.$route.params.idCategory}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

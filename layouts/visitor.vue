@@ -98,7 +98,7 @@ export default {
     this.$store.commit("onStart");
   }, mounted() {
 
-    axios.get(`http://127.0.0.1:8000/api/account/User_retrieve/${this.$store.state.username}/`)
+    axios.get(`https://parsiancoyazd.ir/api/account/User_retrieve/${this.$store.state.username}/`)
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data);

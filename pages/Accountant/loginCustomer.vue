@@ -41,7 +41,7 @@ export default {
     methods: {
         async getCustomerInfo() {
             this.loading = true
-            await axios.get(`http://127.0.0.1:8000/api/account/Customer_panel_retrieve/${this.customerId}/`)
+            await axios.get(`https://parsiancoyazd.ir/api/account/Customer_panel_retrieve/${this.customerId}/`)
                .then((response) => {
                     this.data = response.data
                     this.$router.push({ path: `/Accountant/customer/${this.customerId}/PurchaseHistory/`, });

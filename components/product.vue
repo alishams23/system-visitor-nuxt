@@ -87,7 +87,7 @@ export default {
     }, methods: {
         addToCard() {
             this.loading = true
-            axios.get(`http://127.0.0.1:8000/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
+            axios.get(`https://parsiancoyazd.ir/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);

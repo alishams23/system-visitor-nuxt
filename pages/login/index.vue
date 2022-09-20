@@ -42,7 +42,7 @@ export default {
   },methods:{
     async login(){
       this.loading = true
-      await axios.post("http://127.0.0.1:8000/api/account/login/",{username:this.username,password:this.password}).then((response) => {if(response.data.token){this.$store.commit("login", {
+      await axios.post("https://parsiancoyazd.ir/api/account/login/",{username:this.username,password:this.password}).then((response) => {if(response.data.token){this.$store.commit("login", {
                 token: response.data.token,
                 username: this.username,});this.$router.push("/")}}).catch( (error)  =>{
                     if (error.response) {

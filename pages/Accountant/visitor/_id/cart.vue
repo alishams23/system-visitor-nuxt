@@ -99,7 +99,7 @@ export default {
     methods: {
         async getCartInfo() {
             this.data = null;
-            await axios.get(`http://127.0.0.1:8000/api/product/Order_retrieve/${this.$route.params.id}/`)
+            await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve/${this.$route.params.id}/`)
                 .catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);
@@ -115,7 +115,7 @@ export default {
         },
         async sendData() {
             this.loading = true;
-            await axios.put(`http://127.0.0.1:8000/api/product/Update_order/${this.data.id}/`, { "is_payed": true, "is_payment_cash": this.is_payment_cash })
+            await axios.put(`https://parsiancoyazd.ir/api/product/Update_order/${this.data.id}/`, { "is_payed": true, "is_payment_cash": this.is_payment_cash })
                 .catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);
@@ -128,7 +128,7 @@ export default {
         },
         async deleteItem(id) {
             this.loading = true;
-            await axios.delete(`http://127.0.0.1:8000/api/product/delete_order_product/${id}/`)
+            await axios.delete(`https://parsiancoyazd.ir/api/product/delete_order_product/${id}/`)
                 .catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);

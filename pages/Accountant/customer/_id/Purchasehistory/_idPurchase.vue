@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     async getCartInfo() {
-      await axios.get(`http://127.0.0.1:8000/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -87,7 +87,7 @@ export default {
     },
     async accept() {
       this.loading = true
-      await axios.get(`http://127.0.0.1:8000/api/accountant/confirm_Order/${this.data.id}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/accountant/confirm_Order/${this.data.id}/`)
         .then((response) => {
           this.loading = false;this.data.check_Accountants=!this.data.check_Accountants
         }).catch(function (error) {
