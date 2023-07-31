@@ -90,7 +90,7 @@ export default {
         this.$store.commit("onStart");
     }, mounted() {
         if (this.$route.params.id) {
-            axios.get(`http://127.0.0.1:8000/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+            axios.get(`https://parsiancoyazd.ir/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);
