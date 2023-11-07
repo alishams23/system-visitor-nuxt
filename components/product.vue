@@ -87,7 +87,13 @@ export default {
     }, methods: {
         addToCard() {
             this.loading = true
-            axios.get(`https://parsiancoyazd.ir/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`)
+            axios.get(`https://parsiancoyazd.ir/api/product/add_product_to_order/${this.customer}/${this.result.id}/${this.count}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);

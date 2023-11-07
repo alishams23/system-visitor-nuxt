@@ -11,7 +11,10 @@
       <div class="bg-parsian" style="width: 5px !important; height: 100%;"></div>
     </div>
   </nuxt-link>
+  <Empty  v-if="data.length ==0" />
+
   </div>
+  
 </template>
 
 <script>
@@ -25,7 +28,13 @@ export default {
     },
     methods: {
     async getPurchaseHistory() {
-      await axios.get(`https://parsiancoyazd.ir/api/product/History_purchase_list/${this.$route.params.id}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/History_purchase_list_visitor/${this.$route.params.id}/${this.$store.state.username}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

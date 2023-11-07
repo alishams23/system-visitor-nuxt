@@ -64,7 +64,7 @@
           </li>
         </ul>
       </div>
-      <div class="bg-parsian rounded-4">
+      <!-- <div class="bg-parsian rounded-4">
         <div v-if="data != null"
           class="  background-wallet rounded-4 shadow d-flex flex-column justify-content-between py-2 px-2">
           <div class="d-flex justify-content-between">
@@ -90,7 +90,7 @@
             <p class="pe-3 pt-2 fs-5">{{ data.payment_invoice }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
     </aside>
     <main id="main" class="main">
@@ -128,7 +128,13 @@ export default {
     this.$store.commit("onStart");
   }, mounted() {
     if (this.$route.params.id) {
-      axios.get(`https://parsiancoyazd.ir/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+      axios.get(`https://parsiancoyazd.ir/api/account/Customer_panel_retrieve/${this.$route.params.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

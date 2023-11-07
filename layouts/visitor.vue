@@ -98,7 +98,13 @@ export default {
     this.$store.commit("onStart");
   }, mounted() {
 
-    axios.get(`https://parsiancoyazd.ir/api/account/User_retrieve/${this.$store.state.username}/`)
+    axios.get(`https://parsiancoyazd.ir/api/account/User_retrieve/${this.$store.state.username}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data);

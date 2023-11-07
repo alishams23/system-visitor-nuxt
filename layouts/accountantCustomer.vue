@@ -90,7 +90,13 @@ export default {
         this.$store.commit("onStart");
     }, mounted() {
         if (this.$route.params.id) {
-            axios.get(`https://parsiancoyazd.ir/api/account/Customer_panel_retrieve/${this.$route.params.id}/`)
+            axios.get(`https://parsiancoyazd.ir/api/account/Customer_panel_retrieve/${this.$route.params.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);

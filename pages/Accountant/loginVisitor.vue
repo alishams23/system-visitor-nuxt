@@ -43,7 +43,13 @@ export default {
     methods: {
         async getCustomerInfo() {
             this.loading = true
-            await axios.get(`https://parsiancoyazd.ir/api/account/User_retrieve/${this.visitorId}/`)
+            await axios.get(`https://parsiancoyazd.ir/api/account/User_retrieve/${this.visitorId}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
                .then((response) => {
                     this.data = response.data
                     this.$router.push({ path: `/Accountant/visitor/${this.visitorId}/Purchasehistory/`, });

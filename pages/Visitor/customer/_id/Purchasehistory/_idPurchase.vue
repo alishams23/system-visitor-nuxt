@@ -61,7 +61,13 @@ export default {
   },
   methods: {
     async getCartInfo() {
-      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

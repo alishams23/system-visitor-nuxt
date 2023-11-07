@@ -40,7 +40,7 @@
             </tbody>
         </table>
        <div v-if="data ">
-        <empy  v-if="data.products.length ==0" />
+        <Empty  v-if="data.products.length ==0" />
         <form v-else  @submit.prevent="sendData">  
             <div class="rounded-3  m-0 my-3  shadow-t2 bg-white d-flex justify-content-between "
                 style="overflow: hidden;">
@@ -58,10 +58,11 @@
                             <div class="fw-bold"> نحوه پرداخت:
                             </div>
                             <div class="px-3 d-flex">
-                                <div class="mx-3">نقد <input type="checkbox" v-model="is_payment_cash"
-                                        @click="paymentCashFalse = !paymentCashFalse"></div>
-                                <div>چک <input type="checkbox" @click="is_payment_cash = !is_payment_cash"
-                                        v-model="paymentCashFalse"></div>
+                                <select value="m" v-model="payment_method" class="form-control" id="exampleFormControlSelect1">
+                                    <option value="m">نقد</option>
+                                    <option value="c">چک</option>
+                                    <option value="b">هر دو</option>
+                                  </select>
                             </div>
                         </div>
                     </div>
@@ -84,22 +85,27 @@
 </template>
   <script>
 import axios from 'axios'
-import Empy from '@/components/empy.vue'
+import Empty from '@/components/Empty.vue'
 export default {
     layout: "visitorCustomer",
     data() {
         return {
             data: null,
             total: 0,
-            is_payment_cash: true,
-            paymentCashFalse: false,
+            payment_method: 'm',
             loading: false,
         };
     },
     methods: {
         async getCartInfo() {
             this.data = null;
-            await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve/${this.$route.params.id}/`)
+            await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve/${this.$route.params.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
                 .catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);
@@ -115,7 +121,13 @@ export default {
         },
         async sendData() {
             this.loading = true;
-            await axios.put(`https://parsiancoyazd.ir/api/product/Update_order/${this.data.id}/`, { "is_payed": true, "is_payment_cash": this.is_payment_cash })
+            await axios.put(`https://parsiancoyazd.ir/api/product/Update_order/${this.data.id}/`, { "is_payed": true, "payment_method": this.payment_method },{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
                 .catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);
@@ -128,7 +140,13 @@ export default {
         },
         async deleteItem(id) {
             this.loading = true;
-            await axios.delete(`https://parsiancoyazd.ir/api/product/delete_order_product/${id}/`)
+            await axios.delete(`https://parsiancoyazd.ir/api/product/delete_order_product/${id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
                 .catch(function (error) {
                 if (error.response) {
                     console.log(error.response.data);
@@ -143,7 +161,7 @@ export default {
     mounted() {
         this.getCartInfo();
     },
-    components: { Empy }
+    components: { Empty }
 }
 </script>
   <style>

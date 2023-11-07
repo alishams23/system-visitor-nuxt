@@ -71,7 +71,13 @@ export default {
   },
   methods: {
     async getCartInfo() {
-      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -87,7 +93,13 @@ export default {
     },
     async accept() {
       this.loading = true
-      await axios.get(`https://parsiancoyazd.ir/api/accountant/confirm_Order/${this.data.id}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/accountant/confirm_Order/${this.data.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .then((response) => {
           this.loading = false;this.data.check_Accountants=!this.data.check_Accountants
         }).catch(function (error) {

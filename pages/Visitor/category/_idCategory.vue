@@ -30,7 +30,13 @@ export default {
   },
   methods: {
     async getData() {
-      await axios.get(`https://parsiancoyazd.ir/api/product/product_list/${this.$route.params.idCategory}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/product_list/${this.$route.params.idCategory}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);

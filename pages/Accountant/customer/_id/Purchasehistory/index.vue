@@ -45,7 +45,13 @@ export default {
     async getPurchaseHistory() {
       await axios
         .get(
-          `https://parsiancoyazd.ir/api/product/History_purchase_list/${this.$route.params.id}/`
+          `https://parsiancoyazd.ir/api/product/History_purchase_list/${this.$route.params.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          }
         )
         .catch(function (error) {
           if (error.response) {

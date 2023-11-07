@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div v-if="data">
     <table class="table rounded-3 rtl  table-hover " v-if="data">
       <thead class="bg-parsian-solid text-white ">
@@ -56,6 +57,10 @@
         class="border-none bg-danger text-center text-white d-inline px-5 py-2 rounded-pill m-3">لغو ثبت</button>
     </div>
   </div>
+  <div v-if="data == null" class="alert alert-secondary text-center" role="alert">
+    چیزی برای نمایش وجود ندارد
+  </div>
+ </div>
 </template>
 
 <script>
@@ -71,7 +76,13 @@ export default {
   },
   methods: {
     async getCartInfo() {
-      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/product/Order_retrieve_2/${this.$route.params.idPurchase}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
@@ -87,7 +98,13 @@ export default {
     },
     async accept() {
       this.loading = true
-      await axios.get(`https://parsiancoyazd.ir/api/accountant/confirm_Order/${this.data.id}/`)
+      await axios.get(`https://parsiancoyazd.ir/api/accountant/confirm_Order/${this.data.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          })
         .then((response) => {
           this.loading = false;this.data.check_Accountants=!this.data.check_Accountants
         }).catch(function (error) {

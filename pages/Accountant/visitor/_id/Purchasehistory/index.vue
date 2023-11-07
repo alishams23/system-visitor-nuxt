@@ -30,6 +30,8 @@
         ></div>
       </div>
     </nuxt-link>
+  <Empty v-if="data.length == 0" />
+
   </div>
 </template>
 
@@ -46,7 +48,13 @@ export default {
     async getPurchaseHistory() {
       await axios
         .get(
-          `https://parsiancoyazd.ir/api/accountant/Visitor_registrations_list/${this.$route.params.id}/`
+          `https://parsiancoyazd.ir/api/accountant/Visitor_registrations_list/${this.$route.params.id}/`,{
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+              Authorization: `Token ${this.$store.state.token}`
+            }
+          }
         )
         .catch(function (error) {
           if (error.response) {
